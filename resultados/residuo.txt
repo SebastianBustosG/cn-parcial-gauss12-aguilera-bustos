@@ -1,0 +1,74 @@
+RESIDUO, REFINAMIENTO Y CONDICIONAMIENTO
+==============================================================================
+
+1. Residuo r = b − A·x en precisión extendida (Fractions; A y b exactos)
+
+x = solución de la eliminación con pivoteo parcial escalado (binary64)
+  r[ 1] = -8.076889e-21
+  r[ 2] = -8.729114e-13
+  r[ 3] = -3.592964e-18
+  r[ 4] = +4.397029e-12
+  r[ 5] = -8.922330e-20
+  r[ 6] = +2.290876e-10
+  r[ 7] = -1.390747e-17
+  r[ 8] = +3.113764e-11
+  r[ 9] = -1.802909e-20
+  r[10] = -3.566634e-12
+  r[11] = +9.885511e-18
+  r[12] = +5.163080e-11
+  ||r||_inf (extendida) = 2.290876e-10
+  ||r||_inf (doble, para contraste) = 5.820766e-10
+  (el residuo en doble precisión suma términos de hasta ~1e5 y queda afectado por su propio
+   redondeo: solo el residuo en precisión extendida sirve para juzgar la exactitud)
+
+2. Refinamiento iterativo (residuo exacto, corrección con los factores L y U)
+
+iter      ||r||_inf    ||d||/||x||    err. rel. ∞ vs exacta  díg. mín.
+   0      2.291e-10      2.357e-13                2.357e-13       10.0
+   1      1.366e-22      6.174e-26                6.174e-26       22.6
+   2      3.928e-35      1.614e-38                1.614e-38       35.1
+
+   Contraste: el mismo refinamiento partiendo de la corrida SIN pivoteo
+
+iter      ||r||_inf    ||d||/||x||    err. rel. ∞ vs exacta  díg. mín.
+   0      1.772e-07      2.080e-10                2.080e-10        7.0
+   1      4.640e-16      2.814e-20                2.814e-20       16.9
+   2      2.436e-26      3.782e-30                3.782e-30       26.8
+   3      4.560e-36      5.083e-40                5.083e-40       36.6
+
+   Residuo final (escalado, tras refinar): ||r||_inf = 3.928e-35
+
+3. Condicionamiento
+
+  κ1(A)  estimado (Hager/Higham sobre L y U) = 4.468e+13
+  κ2(A)  estimado (potencias + iteración inversa) = 3.085e+13
+        σ_max ≈ 2.258e+06   σ_min ≈ 7.320e-08
+  Control numpy.linalg.cond(A, 2) = 3.085e+13   det(A) = 1.3646e+09
+  Cota clásica ||δx||/||x|| ≲ κ2·ε = 6.85e-03   (ε = 2.220e-16)
+  Dígitos que garantiza la cota ≈ 2.2
+
+  Con las filas equilibradas (cada fila dividida por una potencia de 2 cercana a su máximo):
+    κ2(A_eq) estimado = 8.380e+03   κ2·ε = 1.86e-12
+    Dígitos que garantiza esa cota ≈ 11.7
+
+  Casi dependencia lineal (fila 7 frente a filas 3 y 5):
+    F7/||F7|| ≈ +0.988806·F3/||F3|| +1.140192·F5/||F5||   (mínimos cuadrados, filas normalizadas)
+    error relativo del ajuste = 2.28e-03
+    Vector singular izquierdo de σ_min, matriz original   : F5 (1.000), F3 (0.007), F7 (0.002)
+    Vector singular izquierdo de σ_min, filas equilibradas: F7 (0.790), F5 (0.452), F3 (0.414)
+
+4. Control con biblioteca (numpy.linalg.solve; solo verificación)
+
+  i    dígitos correctos numpy   dígitos propios (escalado)
+  1                       12.6                         13.0
+  2                       12.5                         12.9
+  3                        9.8                         10.1
+  4                       11.0                         11.3
+  5                       12.8                         13.2
+  6                        9.6                         10.0
+  7                       12.7                         13.0
+  8                       11.6                         11.9
+  9                       12.1                         12.5
+ 10                       12.8                         13.1
+ 11                       11.5                         11.9
+ 12                       12.8                         13.2
