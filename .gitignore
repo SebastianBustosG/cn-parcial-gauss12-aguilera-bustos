@@ -1,0 +1,18 @@
+# entornos virtuales
+.venv/
+venv/
+env/
+
+# bytecode y cachés
+__pycache__/
+*.pyc
+
+# notebooks sin ejecutar y checkpoints
+*.ipynb
+.ipynb_checkpoints/
+
+# sistema / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
