@@ -2,7 +2,7 @@
 
 Resuelve un sistema lineal denso de 12 incógnitas por eliminación gaussiana propia (con y sin pivoteo), contando cada operación y verificando el resultado en precisión extendida.
 
-**Autoría:** [Nombre Apellido] · Sección [N] · Computación Numérica (INF-321) · Ingeniería Civil Informática, Universidad Católica del Maule · Prueba Parcial, noviembre de 2026.
+**Autoría:** Cristobal Aguilera - Sebastián Bustos · Sección 2 · Computación Numérica (INF-321) · Ingeniería Civil Informática, Universidad Católica del Maule · Prueba Parcial, 19 de noviembre de 2026.
 
 ## Requisitos
 

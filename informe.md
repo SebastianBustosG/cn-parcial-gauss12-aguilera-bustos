@@ -4,12 +4,12 @@
 
 | Campo | Detalle |
 | --- | --- |
-| Estudiante | [Nombre Apellido] |
-| Sección | [N] |
+| Estudiantes | Cristobal Aguilera - Sebastián Bustos |
+| Sección | 2 |
 | Asignatura | Computación Numérica (INF-321) · Ingeniería Civil Informática, UCM |
 | Docentes | Juan Manuel Cabezas Contardo · Pedro Pesante |
-| Fecha | Talca, noviembre de 2026 |
-| Repositorio | [enlace al repositorio `cn-parcial-gauss12-<apellido>`] |
+| Fecha | Talca, 19 de noviembre de 2026 |
+| Repositorio | https://github.com/SebastianBustosG/cn-parcial-gauss12-aguilera-bustos.git |
 
 **Declaración de uso de asistentes de IA.** Se usó Claude (Anthropic) como asistente para: leer el enunciado, proponer la arquitectura del repositorio, escribir una primera versión del código de `src/` y del borrador de este informe, y revisar la coherencia entre los números reportados y las salidas de `main.py`. Todas las cifras de este informe provienen de la ejecución del código entregado. [El/la estudiante declara que revisó el código línea por línea y que puede explicar la estrategia de eliminación, el conteo y el análisis de error en la defensa oral.]
 
