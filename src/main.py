@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+"""Punto de entrada único: python src/main.py
+
+Reproduce todo el contenido de resultados/ sin intervención manual:
+    solucion.csv, traza_eliminacion.txt, conteo_flops.md, residuo.txt
+"""
+>>>>>>> rama-sebastian
 
 import math
 import os

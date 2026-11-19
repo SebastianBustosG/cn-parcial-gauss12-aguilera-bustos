@@ -1,6 +1,7 @@
 """
 
 Instrumentación y reporte del costo operacional.
+Instrumentación y reporte del costo operacional.
 
 Convención declarada (una flop = una operación aritmética elemental en doble precisión):
     * multiplicación, división, suma y resta cuentan 1 flop cada una;
@@ -20,6 +21,7 @@ class Contador:
     def __init__(self):
         self._paso = None
         self.por_paso = {}     
+        self.por_paso = {}      # etiqueta -> dict de contadores
         self.orden = []
 
     def paso(self, etiqueta):
@@ -54,6 +56,7 @@ class Contador:
 
 
     
+    # ---- totales ----
     def total(self, campo, etiquetas=None):
         etiquetas = self.orden if etiquetas is None else etiquetas
         return sum(self.por_paso[e][campo] for e in etiquetas)
@@ -63,7 +66,7 @@ class Contador:
         return self.total("mul") + self.total("div") + self.total("add")
 
     def sobrecosto(self):
-        return{
+        return {
             "comparaciones": self.total("cmp"),
             "divisiones_de_escala": self.total("div_pivote"),
             "intercambios": self.total("swap"),
@@ -133,4 +136,5 @@ def reporte(corridas, referencia=1486):
         "",
     ]
 
+    return "\n".join(out)
     return "\n".join(out)
